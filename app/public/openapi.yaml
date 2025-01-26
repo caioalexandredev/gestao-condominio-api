@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: 'Gestor de Condomínios'
+  version: '0.1'
+paths:
+  /api/home:
+    get:
+      tags:
+        - Dashboard
+      summary: 'Obter informações da página inicial do Dashboard'
+      operationId: da714e881fb56ec0e396aa045fccc9f3
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+tags:
+  -
+    name: Dashboard
+    description: Dashboard
