@@ -7,7 +7,6 @@ use Odan\Session\SessionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Psr7\Response;
 use Throwable;
 use OpenApi\Attributes as OA;
 
@@ -36,7 +35,8 @@ class HomeController extends DefaultController
         RequestInterface       $request,
         ResponseInterface      $response,
         SessionInterface       $session,
-    ): Response {
+    ): ResponseInterface 
+    {
         try {
             $result = array('name' => 'Bob', 'age' => 40);
 

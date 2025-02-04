@@ -2,41 +2,46 @@
 
 namespace App\Controller;
 
-use Doctrine\ORM\EntityManager;
-use App\Entity\User;
+use App\Service\LoginService;
+use Odan\Session\SessionInterface;
+use OpenApi\Attributes as OA;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Throwable;
 
-class UserController
+class UserController extends DefaultController
 {
-    private $entityManager;
+    public function __construct(
+        private LoginService $loginService,
+    )
+    {}
 
-    public function __construct(EntityManager $entityManager)
+    #[OA\Get(
+        path: '/api/login',
+        summary: 'Realiza login e obtem token de autenticação para app',
+        tags: ['Usuário'],
+        responses: [
+            new OA\Response(response: 200, description: 'Requisição bem-sucedida'),
+            new OA\Response(response: 400, description: 'Requisição inválida, dados incorretos ou faltando parâmetros'),
+            new OA\Response(response: 500, description: 'Erro interno do servidor')
+        ]
+    )]
+    public function login(
+        RequestInterface       $request,
+        ResponseInterface      $response,
+        SessionInterface       $session,
+    ): ResponseInterface 
     {
-        $this->entityManager = $entityManager;
-    }
+        try {
+            $data = $this->getDataRequest($request);
+            
+            $result = [
+                'key' => $this->loginService->gerarTokenUsuario($data['cpf'], $data['senha'])
+            ];
 
-    public function addUser($request, $response, $args)
-    {
-        $user = new User();
-        $user->setName("John Doe");
-        $user->setEmail("john.doe@example.com");
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
-        $response->getBody()->write("Usuário criado com ID " . $user->getId());
-        return $response;
-    }
-
-    public function listUsers($request, $response, $args)
-    {
-        $users = $this->entityManager->getRepository(User::class)->findAll();
-        $data = [];
-
-        foreach ($users as $user) {
-            $data[] = ['id' => $user->getId(), 'name' => $user->getName(), 'email' => $user->getEmail()];
+            return $this->jsonResponse($response, $session, $result);
+        } catch (Throwable $e) {
+            return $this->handleException($response, $e, $session);
         }
-
-        $response->getBody()->write(json_encode($data));
-        return $response->withHeader('Content-Type', 'application/json');
     }
 }
