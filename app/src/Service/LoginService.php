@@ -14,7 +14,7 @@ use Firebase\JWT\Key;
 class LoginService
 {
     public function __construct(
-        private EntityManager $entityManager
+        private EntityManager $em
     )
     {
         
@@ -57,14 +57,14 @@ class LoginService
 
     private function consultarUsuarioPorCpf(string $cpf): Usuario
     {
-        $repository = $this->entityManager->getRepository(Pessoa::class);
+        $repository = $this->em->getRepository(Pessoa::class);
         $pessoa = $repository->findOneBy(['cpf' => $cpf, 'ativo' => true]);
 
         if(is_null($pessoa)){
             throw new BadRequestException('Dados não encontrado!');
         }
 
-        $repository = $this->entityManager->getRepository(Usuario::class);
+        $repository = $this->em->getRepository(Usuario::class);
         $usuario = $repository->findOneBy(['pessoa' => $pessoa, 'ativo' => true]);
 
         if(is_null($usuario)){
@@ -76,7 +76,7 @@ class LoginService
 
     private function isSenhaValida(Usuario $usuario, string $senha): bool
     {
-        $repository = $this->entityManager->getRepository(Senha::class);
+        $repository = $this->em->getRepository(Senha::class);
         $senhasUsuario = $repository->findBy(['usuario' => $usuario, 'ativo' => true]);
 
         $passwordHasher = new PasswordHasher();
@@ -90,5 +90,40 @@ class LoginService
         }
 
         return $senhaValida;
+    }
+
+    public function gerarUsuarioADM(): bool
+    {
+        $repository = $this->em->getRepository(Pessoa::class);
+
+        if($repository->findOneBy(['cpf' => '00000000000', 'ativo' => true])){
+            $pessoa = new Pessoa();
+            $pessoa->setNome('Master Administrador');
+            $pessoa->setCpf('00000000000');
+    
+            $this->em->persist($pessoa);
+            $this->em->flush();
+    
+            $usuario = new Usuario();
+            $usuario->setPessoa($pessoa);
+
+            $this->em->persist($usuario);
+            $this->em->flush();
+    
+            $passwordHasher = new PasswordHasher();
+    
+            $senha = new Senha();
+            $senha->setUsuario($usuario);
+            $senha->setDtCadastro(new \DateTime());
+            $senha->setHash($passwordHasher->hashPassword('admin'));
+
+            $this->em->persist($senha);
+            $this->em->flush();
+    
+            return true;
+        }
+
+        return false;
+       
     }
 }
