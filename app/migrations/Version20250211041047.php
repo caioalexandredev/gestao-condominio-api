@@ -31,8 +31,8 @@ final class Version20250211041047 extends AbstractMigration
             usuario_id INT NOT NULL,
             dt_inclusao DATE NOT NULL,
             PRIMARY KEY(id),
-            CONSTRAINT FK_CIDADE FOREIGN KEY (cidade_id) REFERENCES cidade (id),
-        ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;');
+            CONSTRAINT FK_CIDADE_ENDERECO FOREIGN KEY (cidade_id) REFERENCES cidade (id)
+        );');
     }
 
     public function down(Schema $schema): void

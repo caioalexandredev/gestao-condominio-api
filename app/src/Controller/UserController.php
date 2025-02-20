@@ -20,10 +20,23 @@ class UserController extends DefaultController
         parent::__construct($containerInterface);
     }
 
-    #[OA\Get(
+    #[OA\Post(
         path: '/api/login',
         summary: 'Realiza login e obtem token de autenticação para app',
         tags: ['Usuário'],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\MediaType(
+                mediaType: 'application/json',
+                schema: new OA\Schema(
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'cpf', type: 'string', description: 'CPF do usuário para autenticação'),
+                        new OA\Property(property: 'senha', type: 'string', description: 'Senha do usuário para autenticação')
+                    ]
+                )
+            )
+        ),
         responses: [
             new OA\Response(response: 200, description: 'Requisição bem-sucedida'),
             new OA\Response(response: 400, description: 'Requisição inválida, dados incorretos ou faltando parâmetros'),

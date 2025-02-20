@@ -17,11 +17,24 @@ paths:
         '500':
           description: 'Erro interno do servidor'
   /api/login:
-    get:
+    post:
       tags:
         - Usuário
       summary: 'Realiza login e obtem token de autenticação para app'
-      operationId: ab3104e37fa364287443d696436b0c98
+      operationId: d414502c107102295aa03d827add7ada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                cpf:
+                  description: 'CPF do usuário para autenticação'
+                  type: string
+                senha:
+                  description: 'Senha do usuário para autenticação'
+                  type: string
+              type: object
       responses:
         '200':
           description: 'Requisição bem-sucedida'

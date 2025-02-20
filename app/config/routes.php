@@ -8,4 +8,5 @@ use App\Controller\HomeController;
 return function (App $app) {
     $app->get('/api/home', [HomeController::class, 'home']);
     $app->get('/api/gerar/adm', [UserController::class, 'gerarAdm']);
+    $app->post('/api/login', [UserController::class, 'login']);
 };

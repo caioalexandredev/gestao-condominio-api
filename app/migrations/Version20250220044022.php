@@ -28,7 +28,7 @@ final class Version20250220044022 extends AbstractMigration
             usuario_id INT NOT NULL,
             PRIMARY KEY(id),
             CONSTRAINT FK_USUARIO_SENHA FOREIGN KEY (usuario_id) REFERENCES usuario (id)
-        ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;');
+        )');
     }
 
     public function down(Schema $schema): void

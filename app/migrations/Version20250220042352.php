@@ -37,7 +37,7 @@ final class Version20250220042352 extends AbstractMigration
             PRIMARY KEY(id),
             CONSTRAINT FK_endereco FOREIGN KEY (endereco_id) REFERENCES endereco (id),
             CONSTRAINT FK_pessoa FOREIGN KEY (pessoa_id) REFERENCES pessoa (id)
-        ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;');
+        );');
     }
 
     public function down(Schema $schema): void
