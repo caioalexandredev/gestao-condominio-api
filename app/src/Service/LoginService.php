@@ -96,7 +96,7 @@ class LoginService
     {
         $repository = $this->em->getRepository(Pessoa::class);
 
-        if($repository->findOneBy(['cpf' => '00000000000', 'ativo' => true])){
+        if(!$repository->findOneBy(['cpf' => '00000000000', 'ativo' => true])){
             $pessoa = new Pessoa();
             $pessoa->setNome('Master Administrador');
             $pessoa->setCpf('00000000000');

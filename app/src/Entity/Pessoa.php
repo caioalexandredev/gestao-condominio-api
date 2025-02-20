@@ -22,6 +22,11 @@ class Pessoa
     #[ORM\Column(type: 'boolean')]
     private bool $ativo;
 
+    public function __construct()
+    {
+        $this->ativo = true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

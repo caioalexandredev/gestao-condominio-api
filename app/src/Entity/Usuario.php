@@ -20,6 +20,11 @@ class Usuario
     #[ORM\JoinColumn(name: 'pessoa_id', referencedColumnName: 'id')]
     private Pessoa $pessoa;
 
+    public function __construct()
+    {
+        $this->ativo = true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

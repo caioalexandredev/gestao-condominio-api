@@ -71,7 +71,7 @@ abstract class DefaultController
     
         if($httpStatus == self::HTTP_STATUS_INTERNAL_SERVER_ERROR){
             $this->log->error(json_encode($errorMessage), $e->getTrace());
-            $errorMessage = 'Erro interno de servidor';
+            //$errorMessage = 'Erro interno de servidor';
         }
         
         return $this->jsonResponse($response, $session, '', $httpStatus, self::STATUS_ERROR, $errorMessage);

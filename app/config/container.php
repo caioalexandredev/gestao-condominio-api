@@ -1,7 +1,8 @@
 <?php
 
-use Doctrine\ORM\Tools\Setup;
+use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMSetup;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Odan\Session\PhpSession;
@@ -59,20 +60,26 @@ return [
         return $session;
     },
 
-    EntityManager::class => function () {
-        $paths = [__DIR__ . '/../src/Entity'];
-        $isDevMode = true;
+    EntityManager::class => function () 
+    {
+        $config = ORMSetup::createAttributeMetadataConfiguration(
+            paths: [__DIR__ . '../src/Entity/.'],
+            isDevMode: true,
+        );
     
-        $conn = [
+        // Configuração para auto geração de proxies
+        $config->setAutoGenerateProxyClasses(true);
+
+        $connection = DriverManager::getConnection([
             'driver'   => 'pdo_mysql',
             'user'     => getenv('DB_USER'),
             'password' => getenv('DB_PASSWORD'),
             'dbname'   => getenv('DB_NAME'),
             'host'     => getenv('DB_HOST'),
             'port'     => 3306,
-        ];
+        ], $config);
     
-        $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
-        return EntityManager::create($conn, $config);
+        // Criação do EntityManager
+        return new EntityManager($connection, $config);
     }
 ];

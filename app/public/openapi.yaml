@@ -16,7 +16,36 @@ paths:
           description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
         '500':
           description: 'Erro interno do servidor'
+  /api/login:
+    get:
+      tags:
+        - Usuário
+      summary: 'Realiza login e obtem token de autenticação para app'
+      operationId: ab3104e37fa364287443d696436b0c98
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+  /api/gerar/adm:
+    get:
+      tags:
+        - Usuário
+      summary: 'Realiza geração de usuário administrador'
+      operationId: 928e143d9c24d3d3d932a2a98ae6f891
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
 tags:
   -
     name: Dashboard
     description: Dashboard
+  -
+    name: Usuário
+    description: Usuário

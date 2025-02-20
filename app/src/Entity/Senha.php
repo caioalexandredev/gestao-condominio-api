@@ -27,6 +27,11 @@ class Senha
     #[ORM\JoinColumn(name: 'usuario_id', referencedColumnName: 'id')]
     private Usuario $usuario;
 
+    public function __construct()
+    {
+        $this->ativo = true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

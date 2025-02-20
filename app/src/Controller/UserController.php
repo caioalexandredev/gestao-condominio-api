@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Service\LoginService;
 use Odan\Session\SessionInterface;
 use OpenApi\Attributes as OA;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -12,9 +13,12 @@ use Throwable;
 class UserController extends DefaultController
 {
     public function __construct(
+        private ContainerInterface $containerInterface,
         private LoginService $loginService,
     )
-    {}
+    {
+        parent::__construct($containerInterface);
+    }
 
     #[OA\Get(
         path: '/api/login',
@@ -37,6 +41,33 @@ class UserController extends DefaultController
             
             $result = [
                 'key' => $this->loginService->gerarTokenUsuario($data['cpf'], $data['senha'])
+            ];
+
+            return $this->jsonResponse($response, $session, $result);
+        } catch (Throwable $e) {
+            return $this->handleException($response, $e, $session);
+        }
+    }
+
+    #[OA\Get(
+        path: '/api/gerar/adm',
+        summary: 'Realiza geração de usuário administrador',
+        tags: ['Usuário'],
+        responses: [
+            new OA\Response(response: 200, description: 'Requisição bem-sucedida'),
+            new OA\Response(response: 400, description: 'Requisição inválida, dados incorretos ou faltando parâmetros'),
+            new OA\Response(response: 500, description: 'Erro interno do servidor')
+        ]
+    )]
+    public function gerarAdm(
+        RequestInterface       $request,
+        ResponseInterface      $response,
+        SessionInterface       $session,
+    ): ResponseInterface 
+    {
+        try {
+            $result = [
+                'usuarioGerado' => $this->loginService->gerarUsuarioADM()
             ];
 
             return $this->jsonResponse($response, $session, $result);
