@@ -42,6 +42,9 @@ paths:
           description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
         '500':
           description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/gerar/adm:
     get:
       tags:
@@ -55,6 +58,12 @@ paths:
           description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
         '500':
           description: 'Erro interno do servidor'
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
 tags:
   -
     name: Dashboard

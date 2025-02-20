@@ -20,10 +20,18 @@ class UserController extends DefaultController
         parent::__construct($containerInterface);
     }
 
+    #[OA\SecurityScheme(
+        securityScheme: 'api_key',
+        type: 'apiKey',
+        in: 'header',
+        name: 'Authorization'
+    )]
+
     #[OA\Post(
         path: '/api/login',
         summary: 'Realiza login e obtem token de autenticação para app',
         tags: ['Usuário'],
+        security: [['api_key' => []]],
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\MediaType(
