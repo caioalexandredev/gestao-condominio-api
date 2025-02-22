@@ -27,6 +27,22 @@ paths:
       security:
         -
           api_key: []
+  /api/estado/select:
+    get:
+      tags:
+        - Estado
+      summary: 'Select de estados'
+      operationId: 7f456136329025d0f73b4c48d5c5e162
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/home:
     get:
       tags:
@@ -166,6 +182,9 @@ tags:
   -
     name: Cidade
     description: Cidade
+  -
+    name: Estado
+    description: Estado
   -
     name: Dashboard
     description: Dashboard

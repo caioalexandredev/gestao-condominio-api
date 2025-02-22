@@ -3,9 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Cidade;
-use App\Entity\Endereco;
-use App\Entity\Usuario;
-use DateTime;
 use Doctrine\ORM\EntityManager;
 use Odan\Session\SessionInterface;
 

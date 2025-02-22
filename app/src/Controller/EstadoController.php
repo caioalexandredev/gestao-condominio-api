@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\CidadeService;
+use App\Service\EstadoService;
 use Odan\Session\SessionInterface;
 use OpenApi\Attributes as OA;
 use Psr\Container\ContainerInterface;
@@ -10,30 +11,21 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-class CidadeController extends DefaultController
+class EstadoController extends DefaultController
 {
     public function __construct(
         private ContainerInterface $containerInterface,
-        private CidadeService $cidadeService,
+        private EstadoService $estadoService,
     )
     {
         parent::__construct($containerInterface);
     }
 
     #[OA\Get(
-        path: '/api/cidade/select',
-        summary: 'Select de cidades com base na UF',
-        tags: ['Cidade'],
+        path: '/api/estado/select',
+        summary: 'Select de estados',
+        tags: ['Estado'],
         security: [['api_key' => []]],
-        parameters: [
-            new OA\Parameter(
-                name: 'uf',
-                in: 'query',
-                required: true,
-                schema: new OA\Schema(type: 'string'),
-                description: 'UF'
-            )
-        ],
         responses: [
             new OA\Response(response: 200, description: 'Requisição bem-sucedida'),
             new OA\Response(response: 400, description: 'Requisição inválida, dados incorretos ou faltando parâmetros'),
@@ -47,11 +39,7 @@ class CidadeController extends DefaultController
     ): ResponseInterface 
     {
         try {
-            $data = $this->getDataRequest($request);
-            $uf = $data['uf'] ?? null;
-
-            $result = $uf ? $this->cidadeService->select($data['uf']) : [];
-            
+            $result = $this->estadoService->select();
             return $this->jsonResponse($response, $session, $result);
         } catch (Throwable $e) {
             return $this->handleException($response, $e, $session);

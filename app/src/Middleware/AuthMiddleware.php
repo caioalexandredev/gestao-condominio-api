@@ -13,8 +13,6 @@ use \Psr\Http\Server\RequestHandlerInterface;
 
 class AuthMiddleware
 {
-    private $dataUser;
-
     public function __construct(
         private ResponseFactoryInterface $responseFactory,
         private SessionInterface         $session,
