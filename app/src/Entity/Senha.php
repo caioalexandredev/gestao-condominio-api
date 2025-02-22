@@ -20,8 +20,8 @@ class Senha
     #[ORM\Column(type: 'boolean')]
     private bool $ativo;
 
-    #[ORM\Column(name: 'dt_cadastro', type: 'datetime')]
-    private DateTime $dtCadastro;
+    #[ORM\Column(name: 'dt_inclusao', type: 'datetime')]
+    private DateTime $dtInclusao;
 
     #[ORM\ManyToOne(targetEntity: Usuario::class)]
     #[ORM\JoinColumn(name: 'usuario_id', referencedColumnName: 'id')]
@@ -70,14 +70,14 @@ class Senha
         return $this;
     }
 
-    public function getDtCadastro(): ?DateTime
+    public function getDtInclusao(): ?DateTime
     {
-        return $this->dtCadastro;
+        return $this->getDtInclusao();
     }
 
-    public function setDtCadastro(DateTime $dtCadastro): Senha
+    public function setDtInclusao(DateTime $dtInclusao): Senha
     {
-        $this->dtCadastro = $dtCadastro;
+        $this->dtInclusao = $dtInclusao;
         return $this;
     }
 }

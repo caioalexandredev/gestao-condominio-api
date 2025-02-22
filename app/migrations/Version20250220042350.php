@@ -7,29 +7,28 @@ namespace MyProject\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
-final class Version20250211040356 extends AbstractMigration
+final class Version20250220042350 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Criação da tabela pessoa';
+        return 'Criação da tabela contato';
     }
 
     public function up(Schema $schema): void
     {
-        $this->addSql('CREATE TABLE pessoa (
+        $this->addSql('CREATE TABLE contato (
             id INT AUTO_INCREMENT NOT NULL,
-            nome VARCHAR(255) NOT NULL,
-            cpf VARCHAR(255) NOT NULL,
+            contato VARCHAR(255) NOT NULL,
+            tipo INT NOT NULL,
             ativo TINYINT(1) NOT NULL,
+            dt_inclusao DATETIME NOT NULL,
+            usuario_id INT NOT NULL,
             PRIMARY KEY(id)
-        ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;');
+        )');
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('DROP TABLE pessoa;');
+        $this->addSql('DROP TABLE contato;');
     }
 }

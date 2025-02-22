@@ -49,12 +49,33 @@ class PessoaDados
     #[ORM\JoinColumn(name: "pessoa_id", referencedColumnName: "id")]
     private Pessoa $pessoa;
 
+    #[ORM\ManyToOne(targetEntity: Contato::class)]
+    #[ORM\JoinColumn(name: "telefone_contato_id", referencedColumnName: "id")]
+    private Contato $telefone;
+
+    #[ORM\ManyToOne(targetEntity: Contato::class)]
+    #[ORM\JoinColumn(name: "celular_contato_id", referencedColumnName: "id")]
+    private Contato $celular;
+
+    #[ORM\ManyToOne(targetEntity: Contato::class)]
+    #[ORM\JoinColumn(name: "email_contato_id", referencedColumnName: "id")]
+    private Contato $email;
+
     #[ORM\ManyToOne(targetEntity: Usuario::class)]
     #[ORM\JoinColumn(name: "usuario_id", referencedColumnName: "id")]
     private Usuario $usuario;
 
     #[ORM\Column(type:"date", name: "dt_inclusao")]
     private \Datetime $dtInclusao;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $ativo;
+
+    public function __construct()
+    {
+        $this->setAtivo(true);
+        $this->setDtInclusao(new \DateTime());
+    }
 
     public function getId(): int
     {
@@ -193,6 +214,39 @@ class PessoaDados
         return $this;
     }
 
+    public function getEmail(): Contato
+    {
+        return $this->email;
+    }
+
+    public function setEmail(Contato $email): PessoaDados
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    public function getTelefone(): Contato
+    {
+        return $this->telefone;
+    }
+
+    public function setTelefone(Contato $telefone): PessoaDados
+    {
+        $this->telefone = $telefone;
+        return $this;
+    }
+
+    public function getCelular(): Contato
+    {
+        return $this->celular;
+    }
+
+    public function setCelular(Contato $celular): PessoaDados
+    {
+        $this->celular = $celular;
+        return $this;
+    }
+
     public function getDtInclusao(): DateTime
     {
         return $this->dtInclusao;
@@ -201,6 +255,17 @@ class PessoaDados
     public function setDtInclusao(DateTime $dtInclusao): PessoaDados
     {
         $this->dtInclusao = $dtInclusao;
+        return $this;
+    }
+
+    public function getAtivo(): bool
+    {
+        return $this->ativo;
+    }
+
+    public function setAtivo(bool $ativo): PessoaDados
+    {
+        $this->ativo = $ativo;
         return $this;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\LoginService;
+use App\Service\PessoaDadosService;
 use App\Service\PessoaService;
 use Odan\Session\SessionInterface;
 use OpenApi\Attributes as OA;
@@ -17,6 +18,7 @@ class PessoaController extends DefaultController
         private ContainerInterface $containerInterface,
         private LoginService $loginService,
         private PessoaService $pessoaService,
+        private PessoaDadosService $pessoaDadosService,
     )
     {
         parent::__construct($containerInterface);
@@ -73,6 +75,68 @@ class PessoaController extends DefaultController
             $this->pessoaService->cadastrar($data);
 
             return $this->jsonResponse($response, $session, true);
+        } catch (Throwable $e) {
+            return $this->handleException($response, $e, $session);
+        }
+    }
+
+    #[OA\Get(
+        path: '/api/pessoa/listagem',
+        summary: 'Listagem de Pessoas do Sistema',
+        tags: ['Pessoa'],
+        security: [['api_key' => []]],
+        parameters: [
+            new OA\Parameter(
+                name: 'nome',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'string'),
+                description: 'Nome'
+            ),
+            new OA\Parameter(
+                name: 'cpf',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'string'),
+                description: 'CPF'
+            ),
+            new OA\Parameter(
+                name: 'rg',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'string'),
+                description: 'RG'
+            ),
+            new OA\Parameter(
+                name: 'pagina',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'string'),
+                description: 'Página'
+            )
+        ],
+        responses: [
+            new OA\Response(response: 200, description: 'Requisição bem-sucedida'),
+            new OA\Response(response: 400, description: 'Requisição inválida, dados incorretos ou faltando parâmetros'),
+            new OA\Response(response: 500, description: 'Erro interno do servidor')
+        ]
+    )]
+    public function listagem(
+        RequestInterface       $request,
+        ResponseInterface      $response,
+        SessionInterface       $session,
+    ): ResponseInterface 
+    {
+        try {
+            $data = $this->getDataRequest($request);
+
+            $result = $this->pessoaDadosService->listagem(
+                $data['nome'] ?? null,
+                $data['cpf'] ?? null,
+                $data['rg'] ?? null,
+                $data['pagina'] ?? null
+            );
+            return $this->jsonResponse($response, $session, $result);
         } catch (Throwable $e) {
             return $this->handleException($response, $e, $session);
         }

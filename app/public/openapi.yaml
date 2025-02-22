@@ -130,6 +130,51 @@ paths:
       security:
         -
           api_key: []
+  /api/pessoa/listagem:
+    get:
+      tags:
+        - Pessoa
+      summary: 'Listagem de Pessoas do Sistema'
+      operationId: f1f08873a8ada24c03b7b622d3555787
+      parameters:
+        -
+          name: nome
+          in: query
+          description: Nome
+          required: false
+          schema:
+            type: string
+        -
+          name: cpf
+          in: query
+          description: CPF
+          required: false
+          schema:
+            type: string
+        -
+          name: rg
+          in: query
+          description: RG
+          required: false
+          schema:
+            type: string
+        -
+          name: pagina
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/login:
     post:
       tags:

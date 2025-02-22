@@ -24,6 +24,9 @@ final class Version20250220042352 extends AbstractMigration
             endereco_id INT DEFAULT NULL,
             pessoa_id INT DEFAULT NULL,
             usuario_id INT DEFAULT NULL,
+            telefone_contato_id INT DEFAULT NULL,
+            celular_contato_id INT DEFAULT NULL,
+            email_contato_id INT DEFAULT NULL,
             nome VARCHAR(255) NOT NULL,
             sobrenome VARCHAR(255) NOT NULL,
             data_nascimento DATE NOT NULL,
@@ -33,10 +36,14 @@ final class Version20250220042352 extends AbstractMigration
             rg VARCHAR(20) NOT NULL,
             data_emissao_rg DATE NOT NULL,
             orgao_emissor_rg VARCHAR(50) NOT NULL,
-            dt_inclusao DATE NOT NULL,
+            ativo TINYINT(1) NOT NULL,
+            dt_inclusao DATETIME NOT NULL,
             PRIMARY KEY(id),
-            CONSTRAINT FK_endereco FOREIGN KEY (endereco_id) REFERENCES endereco (id),
-            CONSTRAINT FK_pessoa FOREIGN KEY (pessoa_id) REFERENCES pessoa (id)
+            CONSTRAINT FK_pessoa_dados_endereco FOREIGN KEY (endereco_id) REFERENCES endereco (id),
+            CONSTRAINT FK_pessoa_dados_pessoa FOREIGN KEY (pessoa_id) REFERENCES pessoa (id),
+            CONSTRAINT FK_pessoa_dados_telefone_contato FOREIGN KEY (telefone_contato_id) REFERENCES contato (id),
+            CONSTRAINT FK_pessoa_dados_celular_contato FOREIGN KEY (celular_contato_id) REFERENCES contato (id),
+            CONSTRAINT FK_pessoa_dados_email_contato FOREIGN KEY (email_contato_id) REFERENCES contato (id)
         );');
     }
 

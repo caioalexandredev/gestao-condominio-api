@@ -20,7 +20,6 @@ final class Version20250211040242 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // Criação da tabela estado
         $this->addSql('CREATE TABLE estado (
             id INT AUTO_INCREMENT NOT NULL,
             uf VARCHAR(255) NOT NULL,
@@ -28,7 +27,6 @@ final class Version20250211040242 extends AbstractMigration
             PRIMARY KEY(id)
         ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;');
 
-        // Criação da tabela cidade
         $this->addSql('CREATE TABLE cidade (
             id INT AUTO_INCREMENT NOT NULL,
             estado_id INT NOT NULL,

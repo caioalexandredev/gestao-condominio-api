@@ -1,38 +1,30 @@
 <?php
 namespace App\Util;
 
+use Doctrine\ORM\Query;
+
 class Paginacao{
+    public static function prepararListagem(Query $query, int $pageSize, int $page, $extra = []): array
+    {
+        $query->setHydrationMode(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+    
+        $paginator = new \Doctrine\ORM\Tools\Pagination\Paginator($query);
+        $paginator->setUseOutputWalkers(false);
 
-    public static function paginar($qb, $page, $pageSize, $isArray = true, $extra = []){
-        $page = $page >= 1 ? $page : 1;
-        $pageSize = $pageSize >= 1 && $pageSize <= 100 ? $pageSize : 10;
+        $total = count($paginator);
 
-        $firstResult = ($page - 1) * $pageSize;
+        $pagesCount = ceil($total / $pageSize);
 
-        $qb->setFirstResult($firstResult)
-            ->setMaxResults($pageSize);
+        $paginator->getQuery()
+                    ->setFirstResult($pageSize * ($page-1))
+                    ->setMaxResults($pageSize)->getSQL();
 
-        $query = $qb->getQuery();
+        $result = array();
 
-        if($isArray){
-            $query->setHydrationMode(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        foreach ($paginator as $pageItem) {
+            $result[] = $pageItem;
         }
-
-        $result = $query->getResult();
-
-        $countQuery = clone $query;
-        $countQuery->setFirstResult(null)->setMaxResults(null);
-
-        $parameters = $query->getParameters();
-
-        foreach ($parameters as $parameter) {
-            $countQuery->setParameter($parameter->getName(), $parameter->getValue());
-        }
-
-        $totalItems = count($countQuery->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY));
-
-        $pagesCount = ceil($totalItems / $pageSize);
-
-        return ['result' => $result, 'paginas' => $pagesCount, 'total' => $totalItems, 'extra' => $extra];
+        
+        return ['resultado' => $result, 'paginas' => $pagesCount, 'total' => $total, 'extra' => $extra];
     }
 }

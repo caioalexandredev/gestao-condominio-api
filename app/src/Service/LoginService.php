@@ -125,7 +125,7 @@ class LoginService
     
             $senha = new Senha();
             $senha->setUsuario($usuario);
-            $senha->setDtCadastro(new \DateTime());
+            $senha->setDtInclusao(new \DateTime());
             $senha->setHash($passwordHasher->hashPassword('admin'));
 
             $this->em->persist($senha);

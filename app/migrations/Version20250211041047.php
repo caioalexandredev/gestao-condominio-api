@@ -19,7 +19,6 @@ final class Version20250211041047 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // Criação da tabela endereco
         $this->addSql('CREATE TABLE endereco (
             id INT AUTO_INCREMENT NOT NULL,
             cep VARCHAR(20) NOT NULL,
@@ -29,7 +28,7 @@ final class Version20250211041047 extends AbstractMigration
             numero VARCHAR(50) NOT NULL,
             complemento VARCHAR(255) DEFAULT NULL,
             usuario_id INT NOT NULL,
-            dt_inclusao DATE NOT NULL,
+            dt_inclusao DATETIME NOT NULL,
             PRIMARY KEY(id),
             CONSTRAINT FK_CIDADE_ENDERECO FOREIGN KEY (cidade_id) REFERENCES cidade (id)
         );');

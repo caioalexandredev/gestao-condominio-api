@@ -61,7 +61,7 @@ class UserController extends DefaultController
             $data = $this->getDataRequest($request);
             
             $result = [
-                'key' => $this->loginService->gerarTokenUsuario($data['cpf'], $data['senha'])
+                'key' => $this->loginService->gerarTokenUsuario(preg_replace('/\D/', '', $data['cpf']), $data['senha'])
             ];
 
             return $this->jsonResponse($response, $session, $result);

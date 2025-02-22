@@ -9,6 +9,7 @@ return function (App $app) {
 
     $app->group('/api', function (\Slim\Routing\RouteCollectorProxy $gApi) {
         $gApi->post('/pessoa', [\App\Controller\PessoaController::class, 'cadastrar']);
+        $gApi->get('/pessoa/listagem', [\App\Controller\PessoaController::class, 'listagem']);
         $gApi->get('/cidade/select', [\App\Controller\CidadeController::class, 'select']);
         $gApi->get('/estado/select', [\App\Controller\EstadoController::class, 'select']);
     })->add(\App\Middleware\AuthMiddleware::class);
