@@ -3,7 +3,7 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\ORMSetup;
 
 $config = ORMSetup::createAttributeMetadataConfiguration(
-    paths: [__DIR__ . '../src/Entity/.'],
+    paths: [__DIR__ . '/../src/Entity/.'],
     isDevMode: true,
 );
 

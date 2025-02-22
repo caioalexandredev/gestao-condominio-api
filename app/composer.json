@@ -20,7 +20,8 @@
         "doctrine/migrations": "^3.8"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "doctrine/data-fixtures": "^2.0"
     },
     "autoload": {
         "psr-4": {

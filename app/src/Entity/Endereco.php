@@ -66,7 +66,7 @@ class Endereco
         return $this->cidade;
     }
 
-    public function setCidade(string $cidade): Endereco
+    public function setCidade(Cidade $cidade): Endereco
     {
         $this->cidade = $cidade;
         return $this;

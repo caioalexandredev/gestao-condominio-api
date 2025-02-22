@@ -20,7 +20,7 @@ class PessoaDados
     #[ORM\Column(type:"string")]
     private string $sobrenome;
 
-    #[ORM\Column(type:"date")]
+    #[ORM\Column(name: "data_nascimento", type:"date")]
     private \Datetime $dataNascimento;
 
     #[ORM\Column(type:"string")]
@@ -35,10 +35,10 @@ class PessoaDados
     #[ORM\Column(type:"string")]
     private string $rg;
 
-    #[ORM\Column(type:"date")]
+    #[ORM\Column(name: "data_emissao_rg", type:"date")]
     private \Datetime $dataEmissaoRg;
 
-    #[ORM\Column(type:"string")]
+    #[ORM\Column(name: "orgao_emissor_rg", type:"string")]
     private string $orgaoEmissorRg;
 
     #[ORM\ManyToOne(targetEntity: Endereco::class)]

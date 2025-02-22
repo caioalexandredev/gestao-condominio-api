@@ -41,14 +41,13 @@ class LoginService
         return JWT::encode($payload, $key, 'HS256');
     }
 
-    public function verificarTokenUsuario(string $accessToken): bool
+    public function verificarTokenUsuario(string $accessToken): bool|array
     {
         $token = str_replace('Bearer ', '', $accessToken);
         $key = getenv('API_JWT_KEY');
     
         try {
-            $decoded = JWT::decode($token, new Key($key, 'HS256'));
-            return true;
+            return (array) JWT::decode($token, new Key($key, 'HS256'));
         } catch (\Throwable $t) {
             return false;
         }
@@ -66,6 +65,18 @@ class LoginService
 
         $repository = $this->em->getRepository(Usuario::class);
         $usuario = $repository->findOneBy(['pessoa' => $pessoa, 'ativo' => true]);
+
+        if(is_null($usuario)){
+            throw new BadRequestException('Usuário não encontrado!');
+        }
+
+        return $usuario;
+    }
+
+    public function consultarUsuarioPorSub(string $sub): Usuario
+    {
+        $repository = $this->em->getRepository(Usuario::class);
+        $usuario = $repository->findOneBy(['id' => $sub, 'ativo' => true]);
 
         if(is_null($usuario)){
             throw new BadRequestException('Usuário não encontrado!');

@@ -3,6 +3,30 @@ info:
   title: 'Gestor de Condomínios'
   version: '0.1'
 paths:
+  /api/cidade/select:
+    get:
+      tags:
+        - Cidade
+      summary: 'Select de cidades com base na UF'
+      operationId: d5a877b9e86e976c5ff880db4c60ae7d
+      parameters:
+        -
+          name: uf
+          in: query
+          description: UF
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/home:
     get:
       tags:
@@ -16,6 +40,80 @@ paths:
           description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
         '500':
           description: 'Erro interno do servidor'
+  /api/pessoa:
+    post:
+      tags:
+        - Pessoa
+      summary: 'Realiza o cadastro completo de pessoa'
+      operationId: 9c40273048c10b45151ec9c5d5ae795b
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                nome:
+                  description: 'Nome do usuário'
+                  type: string
+                sobrenome:
+                  description: 'Sobrenome do usuário'
+                  type: string
+                dt_nascimento:
+                  description: 'Data de nascimento do usuário (YYYY-MM-DD)'
+                  type: string
+                sexo:
+                  description: 'Sexo do usuário (M/F)'
+                  type: string
+                cpf:
+                  description: 'CPF do usuário'
+                  type: string
+                naturalidade:
+                  description: 'Cidade natal do usuário'
+                  type: string
+                rg:
+                  description: 'Registro Geral (RG) do usuário'
+                  type: string
+                orgao_emissao:
+                  description: 'Órgão emissor do RG'
+                  type: string
+                dt_emissao:
+                  description: 'Data de emissão do RG (YYYY-MM-DD)'
+                  type: string
+                celular:
+                  description: 'Número de telefone celular do usuário'
+                  type: string
+                email:
+                  description: 'Endereço de e-mail do usuário'
+                  type: string
+                cep:
+                  description: 'CEP do endereço do usuário'
+                  type: string
+                cidade:
+                  description: 'Cidade do endereço do usuário'
+                  type: string
+                logradouro:
+                  description: 'Nome da rua do endereço do usuário'
+                  type: string
+                bairro:
+                  description: 'Bairro do endereço do usuário'
+                  type: string
+                numero:
+                  description: 'Número do endereço do usuário'
+                  type: string
+                complemento:
+                  description: 'Complemento do endereço (opcional)'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/login:
     post:
       tags:
@@ -66,8 +164,14 @@ components:
       in: header
 tags:
   -
+    name: Cidade
+    description: Cidade
+  -
     name: Dashboard
     description: Dashboard
+  -
+    name: Pessoa
+    description: Pessoa
   -
     name: Usuário
     description: Usuário

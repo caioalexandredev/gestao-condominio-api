@@ -63,7 +63,7 @@ return [
     EntityManager::class => function () 
     {
         $config = ORMSetup::createAttributeMetadataConfiguration(
-            paths: [__DIR__ . '../src/Entity/.'],
+            paths: [__DIR__ . '/../src/Entity/.'],
             isDevMode: true,
         );
     
