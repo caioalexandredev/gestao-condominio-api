@@ -65,7 +65,7 @@ class PessoaDados
     #[ORM\JoinColumn(name: "usuario_id", referencedColumnName: "id")]
     private Usuario $usuario;
 
-    #[ORM\Column(type:"date", name: "dt_inclusao")]
+    #[ORM\Column(type:"datetime", name: "dt_inclusao")]
     private \Datetime $dtInclusao;
 
     #[ORM\Column(type: 'boolean')]
@@ -267,5 +267,30 @@ class PessoaDados
     {
         $this->ativo = $ativo;
         return $this;
+    }
+
+    public function getDataApi(): array
+    {
+        return [
+            'nome' => $this->getNome(),
+            'sobrenome' => $this->getSobrenome(),
+            'dt_nascimento' => $this->getDataNascimento()->format('Y-m-d'),
+            'sexo' => $this->getSexo(),
+            'cpf' => $this->getCpf(),
+            'naturalidade' => $this->getNaturalidade(),
+            'rg' => $this->getRg(),
+            'orgao_emissao' => $this->getOrgaoEmissorRg(),
+            'dt_emissao' => $this->getDataEmissaoRg()->format('Y-m-d'),
+            'telefone' => $this->getTelefone()->getContato(),
+            'celular' => $this->getCelular()->getContato(),
+            'email' => $this->getEmail()->getContato(),
+            'cep' => $this->getEndereco()->getCep(),
+            'cidade' => $this->getEndereco()->getCidade()->getId(),
+            'logradouro' => $this->getEndereco()->getLogradouro(),
+            'bairro' => $this->getEndereco()->getBairro(),
+            'numero' => $this->getEndereco()->getNumero(),
+            'complemento' => $this->getEndereco()->getComplemento(),
+            'uf' => $this->getEndereco()->getCidade()->getEstado()->getUf()
+        ];
     }
 }

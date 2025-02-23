@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Cidade;
 use App\Entity\Endereco;
 use App\Entity\Usuario;
+use App\Exception\BadRequestException;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Odan\Session\SessionInterface;
@@ -27,6 +28,33 @@ class EnderecoService
         $cidade = $this->em->find(Cidade::class, $data["cidade"]);
 
         $endereco = new Endereco();
+        $endereco->setCidade($cidade);
+        $endereco->setNumero($data["numero"]);
+        $endereco->setComplemento($data["complemento"]);
+        $endereco->setBairro($data["bairro"]);
+        $endereco->setLogradouro($data["logradouro"]);
+        $endereco->setCep($data["cep"]);
+        $endereco->setDtInclusao(new DateTime());
+        $endereco->setUsuario($this->usuario);
+
+        $this->em->persist($endereco);
+        $this->em->flush();
+
+        return $endereco;
+    }
+
+    public function consultar(int $id): ?Endereco
+    {
+        return $this->em->find(Endereco::class, $id);
+    }
+
+    public function atualizar(
+        Endereco $endereco,
+        array $data
+    ): Endereco
+    {
+        $cidade = $this->em->find(Cidade::class, $data["cidade"]);
+
         $endereco->setCidade($cidade);
         $endereco->setNumero($data["numero"]);
         $endereco->setComplemento($data["complemento"]);

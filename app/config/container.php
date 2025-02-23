@@ -68,7 +68,7 @@ return [
         );
     
         // Configuração para auto geração de proxies
-        $config->setAutoGenerateProxyClasses(true);
+        $config->setAutoGenerateProxyClasses(2);
 
         $connection = DriverManager::getConnection([
             'driver'   => 'pdo_mysql',

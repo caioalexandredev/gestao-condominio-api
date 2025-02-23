@@ -35,4 +35,25 @@ class CidadeService
             ->getQuery()
             ->getArrayResult();
     }
+
+    public function selectOptionKey(?string $estado = null): array
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('c.id AS key', 'c.nome AS value')
+            ->from(Cidade::class, 'c')
+            ->join('c.estado', 'e');
+
+        if($estado){
+            $qb->andWhere($qb->expr()->in('e.uf', ':uf'))
+                ->setParameter('uf', $estado);
+        }else{
+            $qb->andWhere($qb->expr()->in('e.uf', ':uf'))
+                ->setParameter('uf', "TO");
+        }
+
+        return $qb->orderBy('c.nome', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

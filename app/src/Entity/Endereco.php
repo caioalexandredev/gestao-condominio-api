@@ -37,7 +37,7 @@ class Endereco
     #[ORM\JoinColumn(name: "usuario_id", referencedColumnName: "id")]
     private Usuario $usuario;
 
-    #[ORM\Column(type:"date", name: "dt_inclusao")]
+    #[ORM\Column(type:"datetime", name: "dt_inclusao")]
     private \Datetime $dtInclusao;
 
     public function __construct()

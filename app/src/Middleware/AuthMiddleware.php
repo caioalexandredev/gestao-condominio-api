@@ -45,7 +45,7 @@ class AuthMiddleware
             $response = $this->responseFactory->createResponse(401);
             $response = $response->withHeader('Content-Type', 'application/json');
             $response->getBody()->write($jsonResponse);
-            $this->log->error($e->getMessage());
+            $this->log->error($e->getMessage(), $e->getTrace());
             return $response;
         }
     }
