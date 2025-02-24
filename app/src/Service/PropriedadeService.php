@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Entity\PessoaDados;
 use App\Entity\Propriedade;
 use App\Entity\PropriedadeTipo;
 use App\Entity\Usuario;

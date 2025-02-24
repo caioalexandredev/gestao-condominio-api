@@ -589,6 +589,238 @@ paths:
           description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
         '500':
           description: 'Erro interno do servidor'
+  /api/veiculo/categoria/select:
+    get:
+      tags:
+        - Veículo
+      summary: 'Select de categorias de veículo'
+      operationId: b1e337c456212b7c59c375813bc5f9a6
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/veiculo:
+    post:
+      tags:
+        - Veículo
+      summary: 'Realiza o cadastro completo de veículo'
+      operationId: 7ba9160c41dad34d8c88902b75ac8e9c
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                categoria:
+                  type: integer
+                cor:
+                  type: integer
+                marca:
+                  type: integer
+                proprietario:
+                  type: integer
+                propriedade:
+                  type: integer
+                modelo:
+                  type: string
+                placa:
+                  type: string
+                ano:
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/veiculo/listagem:
+    get:
+      tags:
+        - Veículo
+      summary: 'Listagem de Veículo do Sistema'
+      operationId: f5fb81bb5be407f1f64275af8fbe385c
+      parameters:
+        -
+          name: nome
+          in: query
+          description: Nome
+          required: false
+          schema:
+            type: string
+        -
+          name: placa
+          in: query
+          description: Placa
+          required: false
+          schema:
+            type: string
+        -
+          name: modelo
+          in: query
+          description: Modelo
+          required: false
+          schema:
+            type: integer
+        -
+          name: categoria
+          in: query
+          description: Categoria
+          required: false
+          schema:
+            type: string
+        -
+          name: pagina
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  '/api/veiculo/{id}':
+    get:
+      tags:
+        - Veículo
+      summary: 'Consultar Veículo'
+      operationId: 2a988ada611c4a04f1eec8ef111dde46
+      parameters:
+        -
+          name: id
+          in: path
+          description: id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    put:
+      tags:
+        - Veículo
+      summary: 'Atualiza o cadastro completo de veículo'
+      operationId: 507bbd7b9560785278db7402ba89a4d5
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                categoria:
+                  type: integer
+                cor:
+                  type: integer
+                marca:
+                  type: integer
+                proprietario:
+                  type: integer
+                propriedade:
+                  type: integer
+                modelo:
+                  type: string
+                placa:
+                  type: string
+                ano:
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    delete:
+      tags:
+        - Veículo
+      summary: 'Excluir Veículo do Sistema'
+      operationId: 3c84e4e6f3f21d85999f3dad735fda73
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/veiculo/cor/select:
+    get:
+      tags:
+        - Veículo
+      summary: 'Select de cores de veículo'
+      operationId: 8588b3bcfa7f8f979900d360d6aa7f6c
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/veiculo/marca/select:
+    get:
+      tags:
+        - Veículo
+      summary: 'Select de marcas de veículo'
+      operationId: 6b486a4ed94505cbacaab2f36e617fba
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
 components:
   securitySchemes:
     api_key:
@@ -614,3 +846,6 @@ tags:
   -
     name: Usuário
     description: Usuário
+  -
+    name: Veículo
+    description: Veículo

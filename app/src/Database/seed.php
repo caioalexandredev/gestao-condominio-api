@@ -6,6 +6,9 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use App\Database\Fixtures\EstadoCidadeApiFixture;
 use App\Database\Fixtures\PropriedadeTipoFixture;
+use App\Database\Fixtures\VeiculoCategoriaFixture;
+use App\Database\Fixtures\VeiculoCorFixture;
+use App\Database\Fixtures\VeiculoMarcaFixture;
 use Doctrine\ORM\EntityManager;
 
 require __DIR__ . '/../../vendor/autoload.php';
@@ -20,6 +23,9 @@ $loader = new Loader();
 $loader->addFixture(new AdministradorFixture());
 $loader->addFixture(new EstadoCidadeApiFixture());
 $loader->addFixture(new PropriedadeTipoFixture());
+$loader->addFixture(new VeiculoCorFixture());
+$loader->addFixture(new VeiculoMarcaFixture());
+$loader->addFixture(new VeiculoCategoriaFixture());
 
 $purger = new ORMPurger();
 $executor = new ORMExecutor($entityManager, $purger);

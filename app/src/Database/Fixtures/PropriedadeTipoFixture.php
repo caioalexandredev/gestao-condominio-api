@@ -3,8 +3,6 @@
 namespace App\Database\Fixtures;
 
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\Estado;
-use App\Entity\Cidade;
 use App\Entity\PropriedadeTipo;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 

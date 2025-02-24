@@ -24,5 +24,14 @@ return function (App $app) {
         $gApi->get('/propriedade/{id}', [\App\Controller\PropriedadeController::class, 'consultar']);
         $gApi->delete('/propriedade/{id}', [\App\Controller\PropriedadeController::class, 'excluir']);
         $gApi->put('/propriedade/{id}', [\App\Controller\PropriedadeController::class, 'atualizar']);
+
+        $gApi->post('/veiculo', [\App\Controller\VeiculoController::class, 'cadastrar']);
+        $gApi->get('/veiculo/marca/select', [\App\Controller\VeiculoMarcaController::class, 'select']);
+        $gApi->get('/veiculo/cor/select', [\App\Controller\VeiculoCorController::class, 'select']);
+        $gApi->get('/veiculo/categoria/select', [\App\Controller\VeiculoCategoriaController::class, 'select']);
+        $gApi->get('/veiculo/listagem', [\App\Controller\VeiculoController::class, 'listagem']);
+        $gApi->get('/veiculo/{id}', [\App\Controller\VeiculoController::class, 'consultar']);
+        $gApi->delete('/veiculo/{id}', [\App\Controller\VeiculoController::class, 'excluir']);
+        $gApi->put('/veiculo/{id}', [\App\Controller\VeiculoController::class, 'atualizar']);
     })->add(\App\Middleware\AuthMiddleware::class);
 };
