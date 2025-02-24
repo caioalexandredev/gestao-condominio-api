@@ -195,4 +195,17 @@ class PessoaDadosService
 
         return $pessoaDados;
     }
+
+    public function select(): array
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select("pd.id AS key", "CONCAT(pd.nome, ' ', pd.sobrenome) AS value")
+            ->from(PessoaDados::class, 'pd')
+            ->where($qb->expr()->eq('pd.ativo', true));
+
+        return $qb->orderBy('value', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

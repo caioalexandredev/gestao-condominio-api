@@ -309,6 +309,244 @@ paths:
       security:
         -
           api_key: []
+  /api/pessoa/select:
+    get:
+      tags:
+        - Pessoa
+      summary: 'Select de Pessoas'
+      operationId: f5e7278e49d4d53cfb758cb8e30be79a
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/propriedade:
+    post:
+      tags:
+        - Propriedade
+      summary: 'Realiza o cadastro completo de propriedade'
+      operationId: 83922659ed12a5200d8ae46946844c7e
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                tipo:
+                  description: 'Nome do usuário'
+                  type: integer
+                observacao:
+                  description: 'Sobrenome do usuário'
+                  type: string
+                proprietario:
+                  description: 'Data de nascimento do usuário (YYYY-MM-DD)'
+                  type: integer
+                cep:
+                  description: 'CEP do endereço do usuário'
+                  type: string
+                cidade:
+                  description: 'Cidade do endereço do usuário'
+                  type: integer
+                logradouro:
+                  description: 'Nome da rua do endereço do usuário'
+                  type: string
+                bairro:
+                  description: 'Bairro do endereço do usuário'
+                  type: string
+                numero:
+                  description: 'Número do endereço do usuário'
+                  type: string
+                complemento:
+                  description: 'Complemento do endereço (opcional)'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/propriedade/listagem:
+    get:
+      tags:
+        - Propriedade
+      summary: 'Listagem de Propriedade do Sistema'
+      operationId: 5f2a7cb2f19837b493fbf501c049b89c
+      parameters:
+        -
+          name: nome
+          in: query
+          description: Nome
+          required: false
+          schema:
+            type: string
+        -
+          name: cpf
+          in: query
+          description: CPF
+          required: false
+          schema:
+            type: string
+        -
+          name: tipo
+          in: query
+          description: Tipo
+          required: false
+          schema:
+            type: integer
+        -
+          name: endereco
+          in: query
+          description: Endereco
+          required: false
+          schema:
+            type: string
+        -
+          name: pagina
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  '/api/propriedade/{id}':
+    get:
+      tags:
+        - Propriedade
+      summary: 'Consultar Propriedade'
+      operationId: d253058e2b5ccc29ca9e2be43e7734ea
+      parameters:
+        -
+          name: id
+          in: path
+          description: id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    put:
+      tags:
+        - Propriedade
+      summary: 'Atualiza o cadastro completo de propriedade'
+      operationId: 3d2f7654885b997477363d6875ccf285
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                tipo:
+                  description: 'Nome do usuário'
+                  type: integer
+                observacao:
+                  description: 'Sobrenome do usuário'
+                  type: string
+                proprietario:
+                  description: 'Data de nascimento do usuário (YYYY-MM-DD)'
+                  type: integer
+                cep:
+                  description: 'CEP do endereço do usuário'
+                  type: string
+                cidade:
+                  description: 'Cidade do endereço do usuário'
+                  type: integer
+                logradouro:
+                  description: 'Nome da rua do endereço do usuário'
+                  type: string
+                bairro:
+                  description: 'Bairro do endereço do usuário'
+                  type: string
+                numero:
+                  description: 'Número do endereço do usuário'
+                  type: string
+                complemento:
+                  description: 'Complemento do endereço (opcional)'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    delete:
+      tags:
+        - Propriedade
+      summary: 'Excluir Propriedade do Sistema'
+      operationId: a5e682620f5ba1aab95034ebe1f0e8b2
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/propriedade/tipo/select:
+    get:
+      tags:
+        - Propriedade
+      summary: 'Select de tipos de propriedade'
+      operationId: 0e3b4b70d178120c2c872c1e0e794269
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/login:
     post:
       tags:
@@ -370,6 +608,9 @@ tags:
   -
     name: Pessoa
     description: Pessoa
+  -
+    name: Propriedade
+    description: Propriedade
   -
     name: Usuário
     description: Usuário

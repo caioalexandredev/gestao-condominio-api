@@ -12,3 +12,5 @@ docker-compose exec php vendor/bin/doctrine-migrations generate  --configuration
 docker-compose exec php vendor/bin/doctrine-migrations migrate  --configuration=config/migrations.php --db-configuration=config/migrations-db.php
 
 docker-compose exec php php src/Database/seed.php
+
+docker-compose exec php php src/Database/faker.php

@@ -10,10 +10,19 @@ return function (App $app) {
     $app->group('/api', function (\Slim\Routing\RouteCollectorProxy $gApi) {
         $gApi->post('/pessoa', [\App\Controller\PessoaController::class, 'cadastrar']);
         $gApi->get('/pessoa/listagem', [\App\Controller\PessoaController::class, 'listagem']);
+        $gApi->get('/pessoa/select', [\App\Controller\PessoaController::class, 'select']);
         $gApi->get('/pessoa/{id}', [\App\Controller\PessoaController::class, 'consultar']);
         $gApi->delete('/pessoa/{id}', [\App\Controller\PessoaController::class, 'excluir']);
         $gApi->put('/pessoa/{id}', [\App\Controller\PessoaController::class, 'atualizar']);
+
         $gApi->get('/cidade/select', [\App\Controller\CidadeController::class, 'select']);
         $gApi->get('/estado/select', [\App\Controller\EstadoController::class, 'select']);
+
+        $gApi->post('/propriedade', [\App\Controller\PropriedadeController::class, 'cadastrar']);
+        $gApi->get('/propriedade/listagem', [\App\Controller\PropriedadeController::class, 'listagem']);
+        $gApi->get('/propriedade/tipo/select', [\App\Controller\PropriedadeTipoController::class, 'select']);
+        $gApi->get('/propriedade/{id}', [\App\Controller\PropriedadeController::class, 'consultar']);
+        $gApi->delete('/propriedade/{id}', [\App\Controller\PropriedadeController::class, 'excluir']);
+        $gApi->put('/propriedade/{id}', [\App\Controller\PropriedadeController::class, 'atualizar']);
     })->add(\App\Middleware\AuthMiddleware::class);
 };

@@ -4,6 +4,7 @@ use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use App\Database\Fixtures\PessoaDadosFixture;
+use App\Database\Fixtures\PropriedadeFixture;
 use Doctrine\ORM\EntityManager;
 
 require __DIR__ . '/../../vendor/autoload.php';
@@ -16,6 +17,7 @@ $entityManager = $container->get(EntityManager::class);
 
 $loader = new Loader();
 $loader->addFixture(new PessoaDadosFixture());
+$loader->addFixture(new PropriedadeFixture());
 
 $purger = new ORMPurger();
 $executor = new ORMExecutor($entityManager, $purger);
