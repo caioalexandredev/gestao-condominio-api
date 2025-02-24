@@ -20,6 +20,7 @@ return function (App $app) {
 
         $gApi->post('/propriedade', [\App\Controller\PropriedadeController::class, 'cadastrar']);
         $gApi->get('/propriedade/listagem', [\App\Controller\PropriedadeController::class, 'listagem']);
+        $gApi->get('/propriedade/select', [\App\Controller\PropriedadeController::class, 'select']);
         $gApi->get('/propriedade/tipo/select', [\App\Controller\PropriedadeTipoController::class, 'select']);
         $gApi->get('/propriedade/{id}', [\App\Controller\PropriedadeController::class, 'consultar']);
         $gApi->delete('/propriedade/{id}', [\App\Controller\PropriedadeController::class, 'excluir']);

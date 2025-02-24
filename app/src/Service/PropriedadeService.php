@@ -140,7 +140,7 @@ class PropriedadeService
                 ->setParameter('tipo', $tipo);
         }
 
-        $qb->andWhere($qb->expr()->eq('pd.ativo', true))
+        $qb->andWhere($qb->expr()->eq('p.ativo', true))
             ->orderBy('id', 'DESC');
 
         $dados = Paginacao::prepararListagem($qb->getQuery(), 10, $pagina ?? 1);
@@ -190,5 +190,19 @@ class PropriedadeService
         $this->em->flush();
 
         return $propriedade;
+    }
+
+    public function select(): array
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select("p.id AS key", "CONCAT(e.logradouro, ', N° ', e.numero, ', ', e.complemento) AS value")
+            ->from(Propriedade::class, 'p')
+            ->join('p.endereco', 'e')
+            ->where($qb->expr()->eq('p.ativo', true));
+
+        return $qb->orderBy('value', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
     }
 }

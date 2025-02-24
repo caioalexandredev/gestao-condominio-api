@@ -531,6 +531,22 @@ paths:
       security:
         -
           api_key: []
+  /api/propriedade/select:
+    get:
+      tags:
+        - Propriedade
+      summary: 'Select de Propriedade'
+      operationId: 0f66eb82d22998fd30cbd26cbbe820d5
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/propriedade/tipo/select:
     get:
       tags:

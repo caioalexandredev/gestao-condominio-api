@@ -267,4 +267,29 @@ class PropriedadeController extends DefaultController
             return $this->handleException($response, $e, $session);
         }
     }
+
+    #[OA\Get(
+        path: '/api/propriedade/select',
+        summary: 'Select de Propriedade',
+        tags: ['Propriedade'],
+        security: [['api_key' => []]],
+        responses: [
+            new OA\Response(response: 200, description: 'Requisição bem-sucedida'),
+            new OA\Response(response: 400, description: 'Requisição inválida, dados incorretos ou faltando parâmetros'),
+            new OA\Response(response: 500, description: 'Erro interno do servidor')
+        ]
+    )]
+    public function select(
+        RequestInterface       $request,
+        ResponseInterface      $response,
+        SessionInterface       $session,
+    ): ResponseInterface 
+    {
+        try {
+            $result = $this->propriedadeService->select();
+            return $this->jsonResponse($response, $session, $result);
+        } catch (Throwable $e) {
+            return $this->handleException($response, $e, $session);
+        }
+    }
 }
