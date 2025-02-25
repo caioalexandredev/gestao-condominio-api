@@ -1,10 +1,16 @@
 <?php
 
 use App\Database\Fixtures\AdministradorFixture;
+use App\Database\Fixtures\ContaPagarCategoriaFixture;
+use App\Database\Fixtures\ContaReceberCategoriaFixture;
+use App\Database\Fixtures\ContaStatusFixture;
+use App\Database\Fixtures\ContaTipoFixture;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use App\Database\Fixtures\EstadoCidadeApiFixture;
+use App\Database\Fixtures\InformativoVisibilidadeFixture;
+use App\Database\Fixtures\OcorrenciaTipoFixture;
 use App\Database\Fixtures\PropriedadeTipoFixture;
 use App\Database\Fixtures\VeiculoCategoriaFixture;
 use App\Database\Fixtures\VeiculoCorFixture;
@@ -26,6 +32,12 @@ $loader->addFixture(new PropriedadeTipoFixture());
 $loader->addFixture(new VeiculoCorFixture());
 $loader->addFixture(new VeiculoMarcaFixture());
 $loader->addFixture(new VeiculoCategoriaFixture());
+$loader->addFixture(new ContaPagarCategoriaFixture());
+$loader->addFixture(new ContaReceberCategoriaFixture());
+$loader->addFixture(new ContaStatusFixture());
+$loader->addFixture(new ContaTipoFixture());
+$loader->addFixture(new OcorrenciaTipoFixture());
+$loader->addFixture(new InformativoVisibilidadeFixture());
 
 $purger = new ORMPurger();
 $executor = new ORMExecutor($entityManager, $purger);

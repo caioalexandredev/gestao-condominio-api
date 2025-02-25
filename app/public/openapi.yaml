@@ -27,6 +27,70 @@ paths:
       security:
         -
           api_key: []
+  /api/conta/pagar/categoria/select:
+    get:
+      tags:
+        - 'Conta a Pagar'
+      summary: 'Select de categorias de conta a pagar'
+      operationId: 4f7f4b28cf3566843811bb82756996d1
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/conta/receber/categoria/select:
+    get:
+      tags:
+        - 'Conta a Pagar'
+      summary: 'Select de categorias de conta a receber'
+      operationId: 561ab4c240716c20990e3ee87c8c5e65
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/conta/status/select:
+    get:
+      tags:
+        - Financeiro
+      summary: 'Select de status de conta'
+      operationId: 2fa8745c40bdf85d7fb1c87cffaf4d06
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/conta/tipo/select:
+    get:
+      tags:
+        - Financeiro
+      summary: 'Select de tipo de conta'
+      operationId: 2e99901f6fae187ea4d35c85a5b6d529
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/estado/select:
     get:
       tags:
@@ -56,6 +120,38 @@ paths:
           description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
         '500':
           description: 'Erro interno do servidor'
+  /api/informativo/visibilidade/select:
+    get:
+      tags:
+        - Informativo
+      summary: 'Select de visibilidade de informativos'
+      operationId: 17f40da7c1e457d38b452b3ee10dfe6b
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/ocorrencia/tipo/select:
+    get:
+      tags:
+        - Ocorrência
+      summary: 'Select de tipo de ocorrência'
+      operationId: fe8d981c32804bc9462339620d6e74e0
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/pessoa:
     post:
       tags:
@@ -848,11 +944,23 @@ tags:
     name: Cidade
     description: Cidade
   -
+    name: 'Conta a Pagar'
+    description: 'Conta a Pagar'
+  -
+    name: Financeiro
+    description: Financeiro
+  -
     name: Estado
     description: Estado
   -
     name: Dashboard
     description: Dashboard
+  -
+    name: Informativo
+    description: Informativo
+  -
+    name: Ocorrência
+    description: Ocorrência
   -
     name: Pessoa
     description: Pessoa

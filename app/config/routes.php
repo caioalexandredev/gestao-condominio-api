@@ -34,5 +34,12 @@ return function (App $app) {
         $gApi->get('/veiculo/{id}', [\App\Controller\VeiculoController::class, 'consultar']);
         $gApi->delete('/veiculo/{id}', [\App\Controller\VeiculoController::class, 'excluir']);
         $gApi->put('/veiculo/{id}', [\App\Controller\VeiculoController::class, 'atualizar']);
+
+        $gApi->get('/conta/pagar/categoria/select', [\App\Controller\ContaPagarCategoriaController::class, 'select']);
+        $gApi->get('/conta/receber/categoria/select', [\App\Controller\ContaReceberCategoriaController::class, 'select']);
+        $gApi->get('/conta/status/select', [\App\Controller\ContaStatusController::class, 'select']);
+        $gApi->get('/conta/tipo/select', [\App\Controller\ContaTipoController::class, 'select']);
+        $gApi->get('/informativo/visibilidade/select', [\App\Controller\InformativoVisibilidadeController::class, 'select']);
+        $gApi->get('/ocorrencia/tipo/select', [\App\Controller\OcorrenciaTipoController::class, 'select']);
     })->add(\App\Middleware\AuthMiddleware::class);
 };
