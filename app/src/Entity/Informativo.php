@@ -49,7 +49,7 @@ class Informativo
         return $this->visibilidade;
     }
 
-    public function setVisibilidade(int $visibilidade): Informativo
+    public function setVisibilidade(InformativoVisibilidade $visibilidade): Informativo
     {
         $this->visibilidade = $visibilidade;
         return $this;
@@ -108,5 +108,14 @@ class Informativo
     {
         $this->ativo = $ativo;
         return $this;
+    }
+
+    public function getDataApi(): array
+    {
+        return [
+            'assunto' => $this->getAssunto(),
+            'visibilidade' => $this->getVisibilidade(),
+            'informacao' => $this->getInformacao()
+        ];
     }
 }

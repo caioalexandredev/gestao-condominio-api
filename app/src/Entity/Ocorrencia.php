@@ -64,7 +64,7 @@ class Ocorrencia
         return $this->tipo;
     }
 
-    public function setTipo(PropriedadeTipo $tipo): Ocorrencia
+    public function setTipo(OcorrenciaTipo $tipo): Ocorrencia
     {
         $this->tipo = $tipo;
         return $this;
