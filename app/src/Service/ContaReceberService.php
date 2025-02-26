@@ -160,7 +160,7 @@ class ContaReceberService
             "CONCAT(pd.nome, ' ', pd.sobrenome) AS proprietario",
             'cr.vencimento AS dt_vencimento',
             'cr.dtInclusao AS dt_inclusao'
-        ])->from(ContaPagar::class, 'cr')
+        ])->from(ContaReceber::class, 'cr')
             ->join('cr.tipo', 'crt')
             ->join('cr.proprietario', 'pd');
 
@@ -171,7 +171,7 @@ class ContaReceberService
 
         if (!empty($descricao)) {
             $qb->andWhere(
-                $qb->expr()->like("cr.descricao)", ':descricao')
+                $qb->expr()->like("cr.descricao", ':descricao')
             )->setParameter('descricao', '%' . $descricao . '%');
         }
 
@@ -183,7 +183,7 @@ class ContaReceberService
 
         if (!is_null($dtFimVencimento)) {
             $dtFimVencimento = new DateTime($dtFimVencimento);
-            $qb->andWhere($qb->expr()->gte('cr.vencimento', ':dtFimVencimento'))
+            $qb->andWhere($qb->expr()->lte('cr.vencimento', ':dtFimVencimento'))
                 ->setParameter('dtFimVencimento', $dtFimVencimento->format('Y-m-d'));
         }
 

@@ -115,7 +115,7 @@ class InformativoService
 
         if (!is_null($dtFimInclusao)) {
             $dtFimInclusao = new DateTime($dtFimInclusao);
-            $qb->andWhere($qb->expr()->gte('i.dtInclusao', ':dtFimInclusao'))
+            $qb->andWhere($qb->expr()->lte('i.dtInclusao', ':dtFimInclusao'))
                 ->setParameter('dtFimInclusao', $dtFimInclusao->format('Y-m-d'));
         }
 

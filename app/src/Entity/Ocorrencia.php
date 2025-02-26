@@ -130,8 +130,8 @@ class Ocorrencia
         return [
             'tipo' => $this->getTipo()->getId(),
             'assunto' => $this->getAssunto(),
-            'observacao' => $this->getDtOcorrencia()->format('Y-m-d'),
-            'tipo' => $this->getTipo()->getId()
+            'dt_ocorrencia' => $this->getDtOcorrencia()->format('Y-m-d'),
+            'descricao' => $this->getDescricao()
         ];
     }
 }

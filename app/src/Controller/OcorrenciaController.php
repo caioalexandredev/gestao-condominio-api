@@ -34,7 +34,7 @@ class OcorrenciaController extends DefaultController
                     properties: [
                         new OA\Property(property: 'tipo', type: 'integer', description: 'Tipo de Ocorrência'),
                         new OA\Property(property: 'assunto', type: 'integer', description: 'Assunto'),
-                        new OA\Property(property: 'informacao', type: 'integer', description: 'Informação'),
+                        new OA\Property(property: 'descricao', type: 'integer', description: 'Informação da Ocorrência'),
                         new OA\Property(property: 'dt_ocorrencia', type: 'string', description: 'Data da Ocorrência'),
                     ]
                 )
@@ -76,13 +76,6 @@ class OcorrenciaController extends DefaultController
                 description: 'Assunto'
             ),
             new OA\Parameter(
-                name: 'solicitante',
-                in: 'query',
-                required: false,
-                schema: new OA\Schema(type: 'string'),
-                description: 'Solicitante'
-            ),
-            new OA\Parameter(
                 name: 'dt_inicio_ocorrencia',
                 in: 'query',
                 required: false,
@@ -121,7 +114,6 @@ class OcorrenciaController extends DefaultController
 
             $result = $this->ocorrenciaService->listagem(
                 $data['assunto'] ?? null,
-                $data['solicitante'] ?? null,
                 $data['dt_inicio_ocorrencia'] ?? null,
                 $data['dt_fim_ocorrencia'] ?? null,
                 $data['pagina'] ?? null
@@ -228,7 +220,7 @@ class OcorrenciaController extends DefaultController
                     properties: [
                         new OA\Property(property: 'tipo', type: 'integer', description: 'Tipo de Ocorrência'),
                         new OA\Property(property: 'assunto', type: 'integer', description: 'Assunto'),
-                        new OA\Property(property: 'informacao', type: 'integer', description: 'Informação'),
+                        new OA\Property(property: 'descricao', type: 'integer', description: 'Informação da Ocorrência'),
                         new OA\Property(property: 'dt_ocorrencia', type: 'string', description: 'Data da Ocorrência'),
                     ]
                 )

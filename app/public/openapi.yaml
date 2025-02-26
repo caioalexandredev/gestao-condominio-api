@@ -728,8 +728,8 @@ paths:
                 assunto:
                   description: Assunto
                   type: integer
-                informacao:
-                  description: Informação
+                descricao:
+                  description: 'Informação da Ocorrência'
                   type: integer
                 dt_ocorrencia:
                   description: 'Data da Ocorrência'
@@ -756,13 +756,6 @@ paths:
           name: assunto
           in: query
           description: Assunto
-          required: false
-          schema:
-            type: string
-        -
-          name: solicitante
-          in: query
-          description: Solicitante
           required: false
           schema:
             type: string
@@ -846,8 +839,8 @@ paths:
                 assunto:
                   description: Assunto
                   type: integer
-                informacao:
-                  description: Informação
+                descricao:
+                  description: 'Informação da Ocorrência'
                   type: integer
                 dt_ocorrencia:
                   description: 'Data da Ocorrência'

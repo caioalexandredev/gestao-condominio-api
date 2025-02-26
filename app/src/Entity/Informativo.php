@@ -34,6 +34,12 @@ class Informativo
     #[ORM\Column(type: 'boolean')]
     private bool $ativo;
 
+    public function __construct()
+    {
+        $this->setAtivo(true);
+        $this->setDtInclusao(new \DateTime());
+    }
+
     public function getId(): int
     {
         return $this->id;
@@ -115,7 +121,7 @@ class Informativo
     {
         return [
             'assunto' => $this->getAssunto(),
-            'visibilidade' => $this->getVisibilidade(),
+            'visibilidade' => $this->getVisibilidade()->getId(),
             'informacao' => $this->getInformacao()
         ];
     }

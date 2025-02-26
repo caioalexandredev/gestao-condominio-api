@@ -138,7 +138,7 @@ class ContaPagarService
 
         if (!empty($descricao)) {
             $qb->andWhere(
-                $qb->expr()->like("cp.descricao)", ':descricao')
+                $qb->expr()->like("cp.descricao", ':descricao')
             )->setParameter('descricao', '%' . $descricao . '%');
         }
 
@@ -150,7 +150,7 @@ class ContaPagarService
 
         if (!is_null($dtFimVencimento)) {
             $dtFimVencimento = new DateTime($dtFimVencimento);
-            $qb->andWhere($qb->expr()->gte('cp.vencimento', ':dtFimVencimento'))
+            $qb->andWhere($qb->expr()->lte('cp.vencimento', ':dtFimVencimento'))
                 ->setParameter('dtFimVencimento', $dtFimVencimento->format('Y-m-d'));
         }
 

@@ -34,7 +34,7 @@ class OcorrenciaService
 
         $ocorrencia = new Ocorrencia();
         $ocorrencia->setAssunto($data["assunto"]);
-        $ocorrencia->setDescricao($data["informacao"]);
+        $ocorrencia->setDescricao($data["descricao"]);
         $ocorrencia->setTipo($tipo);
         $ocorrencia->setDtOcorrencia(new DateTime($data["dt_ocorrencia"]));
         $ocorrencia->setDtInclusao(new DateTime());
@@ -67,7 +67,7 @@ class OcorrenciaService
             $this->em->getConnection()->beginTransaction();
 
             $ocorrencia->setAssunto($data["assunto"]);
-            $ocorrencia->setDescricao($data["informacao"]);
+            $ocorrencia->setDescricao($data["descricao"]);
             $ocorrencia->setTipo($tipo);
             $ocorrencia->setDtOcorrencia(new DateTime($data["dt_ocorrencia"]));
 
@@ -83,7 +83,6 @@ class OcorrenciaService
 
     public function listagem(
         ?string $assunto = null,
-        ?string $solicitante = null,
         ?string $dtInicioOcorrencia = null,
         ?string $dtFimOcorrencia = null,
         ?int $pagina = null
@@ -101,12 +100,6 @@ class OcorrenciaService
             ->join('o.usuario', 'u')
             ->join('u.pessoa', 'p');
 
-        if (!empty($solicitante)) {
-            $qb->andWhere(
-                $qb->expr()->like("p.nome", ':solicitante')
-            )->setParameter('solicitante', '%' . $solicitante . '%');
-        }
-
         if (!empty($assunto)) {
             $qb->andWhere(
                 $qb->expr()->like("o.assunto", ':assunto')
@@ -121,7 +114,7 @@ class OcorrenciaService
 
         if (!is_null($dtFimOcorrencia)) {
             $dtFimOcorrencia = new DateTime($dtFimOcorrencia);
-            $qb->andWhere($qb->expr()->gte('o.dtOcorrencia', ':dtFimOcorrencia'))
+            $qb->andWhere($qb->expr()->lte('o.dtOcorrencia', ':dtFimOcorrencia'))
                 ->setParameter('dtFimOcorrencia', $dtFimOcorrencia->format('Y-m-d'));
         }
 
@@ -131,8 +124,8 @@ class OcorrenciaService
         $dados = Paginacao::prepararListagem($qb->getQuery(), 10, $pagina ?? 1);
 
         foreach ($dados['resultado'] as &$registro) {
-            if (isset($registro['dt_inclusao']) && $registro['dt_inclusao'] instanceof \DateTimeInterface) {
-                $registro['dt_inclusao'] = $registro['dt_inclusao']->format('d/m/Y H:i:s');
+            if (isset($registro['dt_ocorrencia']) && $registro['dt_ocorrencia'] instanceof \DateTimeInterface) {
+                $registro['dt_ocorrencia'] = $registro['dt_ocorrencia']->format('d/m/Y H:i:s');
             }
         }
 
