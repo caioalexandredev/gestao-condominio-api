@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: "conta_pagar")]
+#[ORM\Table(name: "conta_receber")]
 class ContaReceber
 {
     #[ORM\Id]
@@ -25,7 +25,7 @@ class ContaReceber
     private ContaTipo $tipo;
 
     #[ORM\Column(type:"date")]
-    private DateTime $vecimento;
+    private DateTime $vencimento;
 
     #[ORM\ManyToOne(targetEntity: ContaStatus::class)]
     #[ORM\JoinColumn(name: "conta_status_id", referencedColumnName: "id")]
@@ -102,12 +102,12 @@ class ContaReceber
 
     public function getVencimento(): DateTime
     {
-        return $this->vecimento;
+        return $this->vencimento;
     }
 
-    public function setVencimento(DateTime $vecimento): ContaReceber
+    public function setVencimento(DateTime $vencimento): ContaReceber
     {
-        $this->vecimento = $vecimento;
+        $this->vencimento = $vencimento;
         return $this;
     }
 

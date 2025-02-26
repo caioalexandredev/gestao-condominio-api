@@ -25,7 +25,7 @@ class ContaPagar
     private ContaTipo $tipo;
 
     #[ORM\Column(type:"date")]
-    private DateTime $vecimento;
+    private DateTime $vencimento;
 
     #[ORM\ManyToOne(targetEntity: ContaStatus::class)]
     #[ORM\JoinColumn(name: "conta_status_id", referencedColumnName: "id")]
@@ -94,12 +94,12 @@ class ContaPagar
 
     public function getVencimento(): DateTime
     {
-        return $this->vecimento;
+        return $this->vencimento;
     }
 
-    public function setVencimento(DateTime $vecimento): ContaPagar
+    public function setVencimento(DateTime $vencimento): ContaPagar
     {
-        $this->vecimento = $vecimento;
+        $this->vencimento = $vencimento;
         return $this;
     }
 

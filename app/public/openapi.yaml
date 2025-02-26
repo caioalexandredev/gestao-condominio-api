@@ -43,12 +43,416 @@ paths:
       security:
         -
           api_key: []
+  /api/conta/pagar:
+    post:
+      tags:
+        - 'Contas a Pagar'
+      summary: 'Realiza o cadastro completo de uma conta a pagar'
+      operationId: e7bad158f5c6c9adb67cd2a9013648bb
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                tipo:
+                  description: 'Tipo de Conta'
+                  type: integer
+                status:
+                  description: 'Status da Conta'
+                  type: integer
+                categoria:
+                  description: 'Categoria da Conta'
+                  type: integer
+                descricao:
+                  description: 'Descrição da Conta'
+                  type: string
+                valor:
+                  description: 'Valor da Conta'
+                  type: number
+                  format: float
+                vencimento:
+                  description: 'Vencimento da Conta'
+                  type: string
+                observacao:
+                  description: Observação
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/conta/pagar/listagem:
+    get:
+      tags:
+        - 'Contas a Pagar'
+      summary: 'Listagem de Contas a Pagar do Sistema'
+      operationId: 6eef8f4d57c623389d3e4cb6c40c7098
+      parameters:
+        -
+          name: descricao
+          in: query
+          description: 'Descrição da Conta'
+          required: false
+          schema:
+            type: string
+        -
+          name: tipo
+          in: query
+          description: 'Tipo de Conta'
+          required: false
+          schema:
+            type: string
+        -
+          name: dt_inicio_vencimento
+          in: query
+          description: 'Data de Vencimento | Início'
+          required: false
+          schema:
+            type: integer
+        -
+          name: dt_fim_vencimento
+          in: query
+          description: 'Data de Vencimento | Fim'
+          required: false
+          schema:
+            type: string
+        -
+          name: pagina
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  '/api/conta/pagar/{id}':
+    get:
+      tags:
+        - 'Contas a Pagar'
+      summary: 'Consultar Conta a Pagar'
+      operationId: 6bcf12f3b569ae5a5770f817b68767f6
+      parameters:
+        -
+          name: id
+          in: path
+          description: id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    put:
+      tags:
+        - 'Contas a Pagar'
+      summary: 'Atualiza o cadastro completo de conta a pagar'
+      operationId: bbfb9ee68704874a13abf7a00efa9df5
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                tipo:
+                  description: 'Tipo de Conta'
+                  type: integer
+                status:
+                  description: 'Status da Conta'
+                  type: integer
+                categoria:
+                  description: 'Categoria da Conta'
+                  type: integer
+                descricao:
+                  description: 'Descrição da Conta'
+                  type: string
+                valor:
+                  description: 'Valor da Conta'
+                  type: number
+                  format: float
+                vencimento:
+                  description: 'Vencimento da Conta'
+                  type: string
+                observacao:
+                  description: Observação
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    delete:
+      tags:
+        - 'Contas a Pagar'
+      summary: 'Excluir Conta a Pagar do Sistema'
+      operationId: 64b82012da8543928597c06bcb85e3af
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/conta/receber/categoria/select:
     get:
       tags:
         - 'Conta a Pagar'
       summary: 'Select de categorias de conta a receber'
       operationId: 561ab4c240716c20990e3ee87c8c5e65
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/conta/receber:
+    post:
+      tags:
+        - 'Contas a Receber'
+      summary: 'Realiza o cadastro completo de uma conta a receber'
+      operationId: add06f89548062d60cf019cc806bf4a1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                tipo:
+                  description: 'Tipo de Conta'
+                  type: integer
+                status:
+                  description: 'Status da Conta'
+                  type: integer
+                propriedade:
+                  description: Propriedade
+                  type: integer
+                proprietario:
+                  description: Proprietário
+                  type: string
+                categoria:
+                  description: 'Categoria da Conta'
+                  type: integer
+                descricao:
+                  description: 'Descrição da Conta'
+                  type: string
+                valor:
+                  description: 'Valor da Conta'
+                  type: number
+                  format: float
+                vencimento:
+                  description: 'Vencimento da Conta'
+                  type: string
+                observacao:
+                  description: Observação
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/conta/receber/listagem:
+    get:
+      tags:
+        - 'Contas a Receber'
+      summary: 'Listagem de Contas a Receber do Sistema'
+      operationId: 28f2877a357911c1122551e57de56eb9
+      parameters:
+        -
+          name: descricao
+          in: query
+          description: 'Descrição da Conta'
+          required: false
+          schema:
+            type: string
+        -
+          name: tipo
+          in: query
+          description: 'Tipo de Conta'
+          required: false
+          schema:
+            type: string
+        -
+          name: dt_inicio_vencimento
+          in: query
+          description: 'Data de Vencimento | Início'
+          required: false
+          schema:
+            type: integer
+        -
+          name: dt_fim_vencimento
+          in: query
+          description: 'Data de Vencimento | Fim'
+          required: false
+          schema:
+            type: string
+        -
+          name: pagina
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  '/api/conta/receber/{id}':
+    get:
+      tags:
+        - 'Contas a Receber'
+      summary: 'Consultar Conta a Receber'
+      operationId: a1c852de2b9c26988a214bbadbb899a4
+      parameters:
+        -
+          name: id
+          in: path
+          description: id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    put:
+      tags:
+        - 'Contas a Receber'
+      summary: 'Atualiza o cadastro completo de conta a receber'
+      operationId: e9ed00fc37345a16c6cec0a402c19857
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                tipo:
+                  description: 'Tipo de Conta'
+                  type: integer
+                status:
+                  description: 'Status da Conta'
+                  type: integer
+                categoria:
+                  description: 'Categoria da Conta'
+                  type: integer
+                descricao:
+                  description: 'Descrição da Conta'
+                  type: string
+                valor:
+                  description: 'Valor da Conta'
+                  type: number
+                  format: float
+                propriedade:
+                  description: Propriedade
+                  type: integer
+                proprietario:
+                  description: Proprietário
+                  type: string
+                vencimento:
+                  description: 'Vencimento da Conta'
+                  type: string
+                observacao:
+                  description: Observação
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    delete:
+      tags:
+        - 'Contas a Receber'
+      summary: 'Excluir Conta a Receber do Sistema'
+      operationId: feafb4b47ff060aaeb93b85314a13669
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: 'Requisição bem-sucedida'
@@ -120,12 +524,358 @@ paths:
           description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
         '500':
           description: 'Erro interno do servidor'
+  /api/informativo:
+    post:
+      tags:
+        - Informativo
+      summary: 'Realiza o cadastro completo de um informativo'
+      operationId: bd26733d1fd0c4783c10d4dae71b1401
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                informacao:
+                  description: Informação
+                  type: string
+                assunto:
+                  description: Assunto
+                  type: string
+                visibilidade:
+                  description: Visibilidade
+                  type: integer
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/informativo/listagem:
+    get:
+      tags:
+        - Informativo
+      summary: 'Listagem de Informativos do Sistema'
+      operationId: 21e5b0e12543f14f3f9447ce46fff0e5
+      parameters:
+        -
+          name: assunto
+          in: query
+          description: Assunto
+          required: false
+          schema:
+            type: string
+        -
+          name: visibilidade
+          in: query
+          description: 'Visibilidade da Informação'
+          required: false
+          schema:
+            type: string
+        -
+          name: dt_inicio_inclusao
+          in: query
+          description: 'Data de Inclusão | Início'
+          required: false
+          schema:
+            type: integer
+        -
+          name: dt_fim_inclusao
+          in: query
+          description: 'Data de Inclusão | Fim'
+          required: false
+          schema:
+            type: string
+        -
+          name: pagina
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  '/api/informativo/{id}':
+    get:
+      tags:
+        - Informativo
+      summary: 'Consultar Informativo'
+      operationId: 6d825fb7a625fe5592b9dc2cac1c12d1
+      parameters:
+        -
+          name: id
+          in: path
+          description: id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    put:
+      tags:
+        - Informativo
+      summary: 'Atualiza o cadastro completo de informativo'
+      operationId: 21e765b200416b7783d0fb338fb0d51d
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                informacao:
+                  description: Informação
+                  type: string
+                assunto:
+                  description: Assunto
+                  type: string
+                visibilidade:
+                  description: Visibilidade
+                  type: integer
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    delete:
+      tags:
+        - Informativo
+      summary: 'Excluir Informativo do Sistema'
+      operationId: 1daf1d35e8660e30333b981807357054
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
   /api/informativo/visibilidade/select:
     get:
       tags:
         - Informativo
       summary: 'Select de visibilidade de informativos'
       operationId: 17f40da7c1e457d38b452b3ee10dfe6b
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/ocorrencia:
+    post:
+      tags:
+        - Ocorrência
+      summary: 'Realiza o cadastro completo de uma ocorrência'
+      operationId: 2fc077839d0d7007a00f57cdac87b4b7
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                tipo:
+                  description: 'Tipo de Ocorrência'
+                  type: integer
+                assunto:
+                  description: Assunto
+                  type: integer
+                informacao:
+                  description: Informação
+                  type: integer
+                dt_ocorrencia:
+                  description: 'Data da Ocorrência'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  /api/ocorrencia/listagem:
+    get:
+      tags:
+        - Ocorrência
+      summary: 'Listagem de Ocorrências do Sistema'
+      operationId: ea0b46a3ae5eb48543d6a1c4b8e5cbe3
+      parameters:
+        -
+          name: assunto
+          in: query
+          description: Assunto
+          required: false
+          schema:
+            type: string
+        -
+          name: solicitante
+          in: query
+          description: Solicitante
+          required: false
+          schema:
+            type: string
+        -
+          name: dt_inicio_ocorrencia
+          in: query
+          description: 'Data de Ocorrência | Início'
+          required: false
+          schema:
+            type: integer
+        -
+          name: dt_fim_ocorrencia
+          in: query
+          description: 'Data de Ocorrência | Fim'
+          required: false
+          schema:
+            type: string
+        -
+          name: pagina
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+  '/api/ocorrencia/{id}':
+    get:
+      tags:
+        - Ocorrência
+      summary: 'Consultar Ocorrência'
+      operationId: ef1775e03855ebe3629d804569f96a73
+      parameters:
+        -
+          name: id
+          in: path
+          description: id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    put:
+      tags:
+        - Ocorrência
+      summary: 'Atualiza o cadastro completo de ocorrência'
+      operationId: 20d8b88eaff7698b8ab54b766f1a2b49
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                tipo:
+                  description: 'Tipo de Ocorrência'
+                  type: integer
+                assunto:
+                  description: Assunto
+                  type: integer
+                informacao:
+                  description: Informação
+                  type: integer
+                dt_ocorrencia:
+                  description: 'Data da Ocorrência'
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Requisição bem-sucedida'
+        '400':
+          description: 'Requisição inválida, dados incorretos ou faltando parâmetros'
+        '500':
+          description: 'Erro interno do servidor'
+      security:
+        -
+          api_key: []
+    delete:
+      tags:
+        - Ocorrência
+      summary: 'Excluir Ocorrência do Sistema'
+      operationId: 98425e986efb8b79c560b2deac9f2560
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: 'Requisição bem-sucedida'
@@ -946,6 +1696,12 @@ tags:
   -
     name: 'Conta a Pagar'
     description: 'Conta a Pagar'
+  -
+    name: 'Contas a Pagar'
+    description: 'Contas a Pagar'
+  -
+    name: 'Contas a Receber'
+    description: 'Contas a Receber'
   -
     name: Financeiro
     description: Financeiro

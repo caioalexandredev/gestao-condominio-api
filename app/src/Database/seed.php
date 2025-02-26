@@ -43,4 +43,4 @@ $purger = new ORMPurger();
 $executor = new ORMExecutor($entityManager, $purger);
 $executor->execute($loader->getFixtures());
 
-echo "Seed inserido com sucesso!\n";
+echo "\033[32mSeeds inseridas com sucesso!\033[0m\n";

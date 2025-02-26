@@ -1,5 +1,9 @@
 <?php
 
+use App\Database\Fixtures\ContaPagarFixture;
+use App\Database\Fixtures\ContaReceberFixture;
+use App\Database\Fixtures\InformativoFixture;
+use App\Database\Fixtures\OcorrenciaFixture;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -20,9 +24,13 @@ $loader = new Loader();
 $loader->addFixture(new PessoaDadosFixture());
 $loader->addFixture(new PropriedadeFixture());
 $loader->addFixture(new VeiculoFixture());
+$loader->addFixture(new ContaPagarFixture());
+$loader->addFixture(new ContaReceberFixture());
+$loader->addFixture(new InformativoFixture());
+$loader->addFixture(new OcorrenciaFixture());
 
 $purger = new ORMPurger();
 $executor = new ORMExecutor($entityManager, $purger);
 $executor->execute($loader->getFixtures(), true);
 
-echo "Faker inserido com sucesso!\n";
+echo "\033[32mFakers inseridos com sucesso!\033[0m\n";

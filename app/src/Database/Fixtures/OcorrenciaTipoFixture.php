@@ -16,7 +16,7 @@ class OcorrenciaTipoFixture extends AbstractFixture
 
         $manager->flush();
 
-        echo "Visibilidade de Informativos inseridos com sucesso!\n";
+        echo "Ocorrência inseridas com sucesso!\n";
     }
 
     private function cadastrar(ObjectManager $manager, int $id, string $descricao): void
