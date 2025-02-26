@@ -41,5 +41,29 @@ return function (App $app) {
         $gApi->get('/conta/tipo/select', [\App\Controller\ContaTipoController::class, 'select']);
         $gApi->get('/informativo/visibilidade/select', [\App\Controller\InformativoVisibilidadeController::class, 'select']);
         $gApi->get('/ocorrencia/tipo/select', [\App\Controller\OcorrenciaTipoController::class, 'select']);
+
+        $gApi->post('/conta/pagar', [\App\Controller\ContaPagarController::class, 'cadastrar']);
+        $gApi->get('/conta/pagar/listagem', [\App\Controller\ContaPagarController::class, 'listagem']);
+        $gApi->get('/conta/pagar/{id}', [\App\Controller\ContaPagarController::class, 'consultar']);
+        $gApi->delete('/conta/pagar/{id}', [\App\Controller\ContaPagarController::class, 'excluir']);
+        $gApi->put('/conta/pagar/{id}', [\App\Controller\ContaPagarController::class, 'atualizar']);
+
+        $gApi->post('/conta/receber', [\App\Controller\ContaReceberController::class, 'cadastrar']);
+        $gApi->get('/conta/receber/listagem', [\App\Controller\ContaReceberController::class, 'listagem']);
+        $gApi->get('/conta/receber/{id}', [\App\Controller\ContaReceberController::class, 'consultar']);
+        $gApi->delete('/conta/receber/{id}', [\App\Controller\ContaReceberController::class, 'excluir']);
+        $gApi->put('/conta/receber/{id}', [\App\Controller\ContaReceberController::class, 'atualizar']);
+
+        $gApi->post('/informativo', [\App\Controller\InformativoController::class, 'cadastrar']);
+        $gApi->get('/informativo/listagem', [\App\Controller\InformativoController::class, 'listagem']);
+        $gApi->get('/informativo/{id}', [\App\Controller\InformativoController::class, 'consultar']);
+        $gApi->delete('/informativo/{id}', [\App\Controller\InformativoController::class, 'excluir']);
+        $gApi->put('/informativo/{id}', [\App\Controller\InformativoController::class, 'atualizar']);
+
+        $gApi->post('/ocorrencia', [\App\Controller\OcorrenciaController::class, 'cadastrar']);
+        $gApi->get('/ocorrencia/listagem', [\App\Controller\OcorrenciaController::class, 'listagem']);
+        $gApi->get('/ocorrencia/{id}', [\App\Controller\OcorrenciaController::class, 'consultar']);
+        $gApi->delete('/ocorrencia/{id}', [\App\Controller\OcorrenciaController::class, 'excluir']);
+        $gApi->put('/ocorrencia/{id}', [\App\Controller\OcorrenciaController::class, 'atualizar']);
     })->add(\App\Middleware\AuthMiddleware::class);
 };
